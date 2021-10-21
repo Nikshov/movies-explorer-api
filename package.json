@@ -1,0 +1,31 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "back 4 project Movies explorer",
+  "main": "app.js",
+  "scripts": {
+    "lint": "npx eslint .",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nikshov/movies-explorer-api.git"
+  },
+  "author": "Nikshov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Nikshov/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/Nikshov/movies-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.11",
+    "validator": "^13.6.0"
+  }
+}
