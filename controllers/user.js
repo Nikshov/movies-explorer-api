@@ -61,7 +61,7 @@ const login = (req, res, next) => {
           res
             .status(200)
             .cookie('token', token, {
-              /* !! */ maxAge: 604800000, httpOnly: true, sameSite: 'Strict', /* secure: true, */
+              maxAge: 604800000, httpOnly: true, sameSite: 'Strict', secure: true,
             })
             .send(_doc);
         })

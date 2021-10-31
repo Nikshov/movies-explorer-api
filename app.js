@@ -14,6 +14,8 @@ const NotFoundError = require('./utils/notFoundError');
 const allowedCors = [
   'http://localhost:3000',
   'https://localhost:3000',
+  'http://mexplorer.nomoredomains.work',
+  'https://mexplorer.nomoredomains.work',
 ];
 
 const { DATABASE = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
