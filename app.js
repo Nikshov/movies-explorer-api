@@ -2,14 +2,14 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const { errors, celebrate, Joi } = require('celebrate');
-const { createNewUser, login, logout } = require('./controllers/user');
-const userRouter = require('./routes/user');
-const movieRouter = require('./routes/movie');
-const auth = require('./middlewares/auth');
+const { errors } = require('celebrate');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const configRateLimit = require('./utils/configRateLimit');
 const error = require('./middlewares/error');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./utils/notFoundError');
+const routes = require('./routes/index');
 
 const allowedCors = [
   'http://localhost:3000',
@@ -21,10 +21,13 @@ const allowedCors = [
 const { DATABASE = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
 const { PORT = 3000 } = process.env;
 const app = express();
+const limiter = rateLimit(configRateLimit);
 mongoose.connect(DATABASE);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
+app.use(limiter);
 app.use(cookieParser());
 app.use(requestLogger);
 
@@ -47,25 +50,8 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-    name: Joi.string().min(2).max(30),
-  }),
-}), createNewUser);
+app.use('/', routes);
 
-app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
-}), login);
-
-app.use(auth);
-app.post('/signout', logout);
-app.use('/users', userRouter);
-app.use('/movies', movieRouter);
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемая страница не найдена'));
 });
