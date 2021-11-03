@@ -1,11 +1,14 @@
 const Movie = require('../models/movie');
 const NotFoundError = require('../utils/notFoundError');
 const ForbiddenError = require('../utils/forbiddenError');
+const {
+  notFoundCard, wrongOwner,
+} = require('../utils/errorMessages');
 
 const getMovies = (req, res, next) => {
   const owner = req.user._id;
   Movie.find({ owner })
-    .then((movies) => res.status(200).send(movies))
+    .then((movies) => res.send(movies))
     .catch(next);
 };
 
@@ -39,7 +42,7 @@ const addMovie = (req, res, next) => {
     nameEN,
     owner,
   })
-    .then((movie) => res.status(200).send(movie))
+    .then((movie) => res.send(movie))
     .catch(next);
 };
 
@@ -49,13 +52,13 @@ const removeMovie = (req, res, next) => {
   Movie.findById({ _id })
     .then((movie) => {
       if (!movie) {
-        throw new NotFoundError('Карточка с таким ID не найдена.');
+        throw new NotFoundError(notFoundCard);
       }
       if (owner !== String(movie.owner)) {
-        throw new ForbiddenError('Нельзя удалить чужую карточку');
+        throw new ForbiddenError(wrongOwner);
       }
       movie.remove();
-      res.status(200).send({
+      res.send({
         message: 'Карточка была удалена',
       });
     })

@@ -8,7 +8,7 @@ const rateLimit = require('express-rate-limit');
 const configRateLimit = require('./utils/configRateLimit');
 const error = require('./middlewares/error');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const NotFoundError = require('./utils/notFoundError');
+const { devMongo } = require('./utils/devConfig');
 const routes = require('./routes/index');
 
 const allowedCors = [
@@ -18,7 +18,7 @@ const allowedCors = [
   'https://mexplorer.nomoredomains.work',
 ];
 
-const { DATABASE = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
+const { DATABASE = devMongo } = process.env;
 const { PORT = 3000 } = process.env;
 const app = express();
 const limiter = rateLimit(configRateLimit);
@@ -51,10 +51,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/', routes);
-
-app.use('*', (req, res, next) => {
-  next(new NotFoundError('Запрашиваемая страница не найдена'));
-});
 
 app.use(errorLogger);
 app.use(errors());
