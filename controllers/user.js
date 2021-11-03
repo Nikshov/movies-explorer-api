@@ -1,4 +1,3 @@
-require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -26,7 +25,7 @@ const updateUser = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) throw new NotFoundError(notFoundUser);
-      return res.send('Информация о пользователе обновлена');
+      return res.send({ message: 'Информация о пользователе обновлена' });
     })
     .catch(next);
 };

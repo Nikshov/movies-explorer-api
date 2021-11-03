@@ -57,10 +57,9 @@ const removeMovie = (req, res, next) => {
       if (owner !== String(movie.owner)) {
         throw new ForbiddenError(wrongOwner);
       }
-      movie.remove();
-      res.send({
+      return movie.remove().then(() => res.send({
         message: 'Карточка была удалена',
-      });
+      }));
     })
     .catch(next);
 };

@@ -3,7 +3,9 @@ const mailAlreadyUsed = 'Пользователь с такой почтой у�
 const notFoundUser = 'Пользователь с таким ID не найден.';
 const notFoundCard = 'Карточка с таким ID не найдена.';
 const wrongOwner = 'Нельзя удалить чужую карточку';
+const authError = 'Необходима авторизация';
+const notFoundPage = 'Запрашиваемая страница не найдена';
 
 module.exports = {
-  wrongPassOrMail, mailAlreadyUsed, notFoundUser, notFoundCard, wrongOwner,
+  wrongPassOrMail, mailAlreadyUsed, notFoundUser, notFoundCard, wrongOwner, authError, notFoundPage,
 };
