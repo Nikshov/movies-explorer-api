@@ -17,6 +17,3 @@ node_modules
 .gitattributes
 
 .env
-
-.editorconfig
-.eslintrc
