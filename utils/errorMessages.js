@@ -5,7 +5,17 @@ const notFoundCard = 'Карточка с таким ID не найдена.';
 const wrongOwner = 'Нельзя удалить чужую карточку';
 const authError = 'Необходима авторизация';
 const notFoundPage = 'Запрашиваемая страница не найдена';
+const emailNotValid = 'email адрес не валиден';
+const urlNotValid = 'URL адрес не валиден';
 
 module.exports = {
-  wrongPassOrMail, mailAlreadyUsed, notFoundUser, notFoundCard, wrongOwner, authError, notFoundPage,
+  wrongPassOrMail,
+  mailAlreadyUsed,
+  notFoundUser,
+  notFoundCard,
+  wrongOwner,
+  authError,
+  notFoundPage,
+  emailNotValid,
+  urlNotValid,
 };

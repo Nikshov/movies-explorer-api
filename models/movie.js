@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { isURL } = require('validator');
+const { urlNotValid } = require('../utils/errorMessages');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -26,21 +27,21 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: [
-      isURL, 'URL адрес не валиден',
+      isURL, urlNotValid,
     ],
   },
   trailer: {
     type: String,
     required: true,
     validate: [
-      isURL, 'URL адрес не валиден',
+      isURL, urlNotValid,
     ],
   },
   thumbnail: {
     type: String,
     required: true,
     validate: [
-      isURL, 'URL адрес не валиден',
+      isURL, urlNotValid,
     ],
   },
   owner: {
