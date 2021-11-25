@@ -10,6 +10,6 @@ router.patch('/me', celebrate({
   }),
 }), updateUser);
 
-router.post('/', approveCheck);
+router.post('/me', approveCheck);
 
 module.exports = router;
