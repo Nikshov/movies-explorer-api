@@ -78,10 +78,15 @@ const logout = (req, res) => {
   }).send({});
 };
 
+const approveCheck = (req, res) => {
+  res.status(200).send({});
+};
+
 module.exports = {
   createNewUser,
   getUser,
   updateUser,
   login,
   logout,
+  approveCheck,
 };
